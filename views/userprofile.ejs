@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stray Animal Welfare</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="nav">
+        <img src="./images/stray-animal-welfare-high-resolution-logo (3).png" class="logo">
+        <p class="title cormorant-infant-bold">Stray Animal Welfare</p>
+        <div class="hyperlink">
+            <a href="login">Login </a>
+            <a href="about.html">About </a>
+            <a href="#contact">Contact us </a>
+        </div>
+        
+    </div>
+    <div class="main">
+        <div class="ngopage">
+            <h1><%=result[0].NGO%></h1>
+            <div class="ngo-intro req" >
+                <p class="cormorant-infant-bold">
+                   <big style="color: black;">Introduction</big> =>
+                    At our NGO, we are passionately dedicated to the well-being and rights of animals, believing firmly that every creature deserves compassion, care, and respect.
+                    <br>
+                    <big style="color: black;">Request Online</big> 
+                </p>
+            </div>
+            <div class="req-form">
+                <form action="/upload?name=<%=result[0].username%>" method="post" enctype="multipart/form-data">
+                    <input type="text" name="reque" placeholder=" Request message" required>
+                    <input type="text" name="location" placeholder=" Exact Location or Landmark" required>
+                    <input type="text" name="phone" placeholder=" Phone detail" required>
+                    <input type="file" name="sampleFile" style="width: 15rem;" required>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>  
+        </div>
+    </div>
+    <div class="contact" id="contact">
+        <p>Email: strayanimalwelfare@gmail.com</p>
+      <p>Contact us: 91526#####, 98767#####</p>
+      <p>Currently Service available in Trichy, Vellor, Madurai, Pudukkottai, Chennai.</p>
+    </div>
+</body>
+</html>
