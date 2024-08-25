@@ -72,7 +72,7 @@ This project is designed to assist NGOs in managing and addressing requests rela
 
     ```plaintext
     JWT_SECRET=your_jwt_secret
-    DB_PASSWORD=your_mysql_password
+    password=your_mysql_password
     img_key=your_imgur_key
     location_key=your_locationiq_key
     ```
