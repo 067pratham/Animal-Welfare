@@ -81,7 +81,6 @@ const login = async (req, res) => {
         console.log(username);
         con.query("select * from request where user=?",[username],function(err,result){
           if(err) throw err;
-          console.log(result);
           // Send the token along with the rendered page
           res.render("ngoprofile.ejs", { result, token });
         });
@@ -95,48 +94,6 @@ const login = async (req, res) => {
     res.status(401).render("invalid.ejs");
   }
 };
-
-// const login = async (req, res) => {
-//   const { username, password } = req.body;
-//   if (!username || !password) {
-//     res
-//       .status(400)
-//       .json({ error: "username or Password fields cannot be empty!" });
-//     return;
-//   }
-
-//   try {
-//     const existingUser = await checkRecordExists("user", "username", username);
-
-//     if (existingUser) {
-//       if (!existingUser.password) {
-//         res.status(401).render("invalid.ejs");
-//         return;
-//       }
-
-//       const passwordMatch = await bcrypt.compare(
-//         password,
-//         existingUser.password
-//       );
-
-//       if (passwordMatch) {
-//         console.log(username);
-//         con.query("select * from request where user=?",[username],function(err,result){
-//           if(err) throw err;
-//           console.log(result);
-//           res.render("ngoprofile.ejs",{result});
-//         })
-//       } else {
-//         res.status(401).render("invalid.ejs");
-//       }
-//     } else {
-//       res.status(401).render("invalid.ejs");
-//     }
-//   } catch (error) {
-//     res.status(401).render("invalid.ejs");
-//   }
-// };
-
 module.exports = {
   register,
   login,

@@ -48,10 +48,11 @@
     </div>
 
     <script>
+         const token = '<%= token %>';
+         localStorage.setItem('authToken', token);
         // Check token on page load
         document.addEventListener('DOMContentLoaded', function() {
             const token = localStorage.getItem('authToken');
-
             // If there's no token, redirect to login page
             if (!token) {
                 window.location.href = '/login';
