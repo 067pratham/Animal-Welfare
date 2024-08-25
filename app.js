@@ -65,7 +65,7 @@ app.post("/search",(req,res)=>{
 //ngo from user -> profile
 app.get("/userprofile",(req,res)=>{
        let name=req.query.name;
-        console.log(name);
+        // console.log(name);
         con.query("select * from user where NGO=?",[name],function(err,result){
           if(err) throw err;
           console.log(result);
@@ -92,7 +92,7 @@ app.get("/userprofile",(req,res)=>{
           imgur.uploadFile(uploadPath).then((urlObject) => {
             fs.unlinkSync(uploadPath)
             console.log(urlObject.data.link);
-            console.log(name);
+            // console.log(name);
             con.query("insert into request values (?,?,?,?,?);",[reque,location,phone,urlObject.data.link,name],function(err,result){
               if(err) throw err;
               res.render("successreq.ejs");

@@ -1,4 +1,3 @@
-<!-- list all images here -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,47 +6,76 @@
     <title>Stray Animal Welfare</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="nav">
         <img src="./images/stray-animal-welfare-high-resolution-logo (3).png" class="logo">
         <p class="title cormorant-infant-bold">Stray Animal Welfare</p>
         <div class="hyperlink">
-            <a href="index.html">Home </a>
-            <a href="about.html">About </a>
-            <a href="#contact">Contact us </a>
+            <a href="index.html">Home</a>
+            <a href="#" id="logout">Logout</a>
+            <a href="#contact">Contact us</a>
         </div>
-        
     </div>
     <div class="main">
         <div class="ngopage pro">
-            <p style=" -webkit-text-stroke: .5px white;color: black; font-size: 4rem;"><%=result.user%></p>
-            <h2 style="color: black; font-size: 2rem; ">Active Request</h2>
+            <p style="-webkit-text-stroke: .5px white;color: black; font-size: 4rem;"><%= result.user %></p>
+            <h2 style="color: black; font-size: 2rem;">Active Request</h2>
             <div class="listing">
-                <% for(it of result){%>
+                <% for (it of result) { %>
                 <div class="cart">
-                    <img class="imglist" src="<%=it.image%>" alt="">
+                    <img class="imglist" src="<%= it.image %>" alt="">
                     <br>
-                    <p class="reqinfo cormorant-infant-bold"><%=it.req%></p>
-                    <p class="reqinfo cormorant-infant-bold"><%=it.location%></p>
-                    <p class="reqinfo cormorant-infant-bold"><%=it.phone%></p>
-                    <form action="/deletecart?name=<%=it.user%>" method="post">
+                    <p class="reqinfo cormorant-infant-bold"><%= it.req %></p>
+                    <p class="reqinfo cormorant-infant-bold"><%= it.location %></p>
+                    <p class="reqinfo cormorant-infant-bold"><%= it.phone %></p>
+                    <form action="/deletecart?name=<%= it.user %>" method="post">
                         <input type="hidden" name="link" value="<%= it.image %>">
                         <button>Resolved</button>
                     </form>
                 </div>
                 <% } %>
             </div>
-            
         </div>
     </div>
     <div class="contact" id="contact">
         <p>Email: strayanimalwelfare@gmail.com</p>
-      <p>Contact us: 91526#####, 98767#####</p>
-      <p>Currently Service available in Trichy, Vellor, Madurai, Pudukkottai, Chennai.</p>
+        <p>Contact us: 91526#####, 98767#####</p>
+        <p>Currently Service available in Trichy, Vellor, Madurai, Pudukkottai, Chennai.</p>
     </div>
+
+    <script>
+        // Check token on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const token = localStorage.getItem('authToken');
+
+            // If there's no token, redirect to login page
+            if (!token) {
+                window.location.href = '/login';
+            }
+        });
+
+        // Handle logout
+        document.getElementById('logout').addEventListener('click', function() {
+            // Remove the token from local storage
+            localStorage.removeItem('authToken');
+
+            // Redirect to the login page
+            window.location.href = '/login';
+
+            // Clear the history to prevent back navigation to a protected page
+            window.history.pushState(null, null, '/login');
+        });
+
+        // Optionally, prevent back navigation by overriding the back button
+        window.onpopstate = function(event) {
+            if (!localStorage.getItem('authToken')) {
+                window.location.href = '/login';
+            }
+        };
+    </script>
 </body>
 </html>
